@@ -13,6 +13,9 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
     GameObject placedPrefab;
 
+    [SerializeField]
+    LayerMask blockLayer;
+
     GameObject spawnedObject;
 
     ARRaycastManager aRRaycastManager;
@@ -26,15 +29,26 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
 
     protected override void OnPress(Vector3 position)
     {
-        // Check if the raycast hit any trackables.
-        if (aRRaycastManager.Raycast(position, hits, TrackableType.PlaneWithinPolygon))
+        Ray ray = Camera.main.ScreenPointToRay(position);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, blockLayer))
+        {
+            Debug.Log("Hit block: " + hit.collider.gameObject.name + " " + hit.collider.gameObject.layer);
+            Vector3 snappedPosition = SnapToGrid(hit.point);
+            PlaceBlock(snappedPosition, hit.collider.transform.rotation);
+        }
+        else if (aRRaycastManager.Raycast(position, hits, TrackableType.PlaneWithinPolygon))
         {
             // Raycast hits are sorted by distance, so the first hit means the closest.
             var hitPose = hits[0].pose;
-
             // Instantiated the prefab.
-            spawnedObject = Instantiate(placedPrefab, SnapToGrid(hitPose.position), hitPose.rotation);
+            PlaceBlock(SnapToGrid(hitPose.position), hitPose.rotation);
         }
+    }
+
+    void PlaceBlock(Vector3 position, Quaternion rotation)
+    {
+        spawnedObject = Instantiate(placedPrefab, position, rotation);
+        spawnedObject.layer = LayerMask.NameToLayer("Blocks");
     }
 
     Vector3 SnapToGrid(Vector3 position)

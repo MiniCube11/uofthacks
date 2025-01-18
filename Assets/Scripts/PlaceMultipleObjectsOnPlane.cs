@@ -21,10 +21,19 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
     ARRaycastManager aRRaycastManager;
     List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
+    List<GameObject> placedBlocks = new List<GameObject>();
+
     protected override void Awake()
     {
         base.Awake();
         aRRaycastManager = GetComponent<ARRaycastManager>();
+    }
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            clearBlocks();
+        }
     }
 
     protected override void OnPress(Vector3 position)
@@ -32,8 +41,9 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
         Ray ray = Camera.main.ScreenPointToRay(position);
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, blockLayer))
         {
-            Debug.Log("Hit block: " + hit.collider.gameObject.name + " " + hit.collider.gameObject.layer);
+            // Debug.Log("Hit block: " + hit.collider.gameObject.name + " " + hit.collider.gameObject.layer);
             Vector3 snappedPosition = SnapToGrid(hit.point);
+            Debug.Log(hit.collider.transform.rotation);
             PlaceBlock(snappedPosition, hit.collider.transform.rotation);
         }
         else if (aRRaycastManager.Raycast(position, hits, TrackableType.PlaneWithinPolygon))
@@ -48,7 +58,10 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
     void PlaceBlock(Vector3 position, Quaternion rotation)
     {
         spawnedObject = Instantiate(placedPrefab, position, rotation);
+        
+        
         spawnedObject.layer = LayerMask.NameToLayer("Blocks");
+        placedBlocks.Add(spawnedObject);
     }
 
     Vector3 SnapToGrid(Vector3 position)
@@ -57,6 +70,16 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
         float y = Mathf.Round(position.y / snapGridSize) * snapGridSize;
         float z = Mathf.Round(position.z / snapGridSize) * snapGridSize;
         return new Vector3(x, y, z);
+    }
+
+    void clearBlocks()
+    {
+        foreach (var block in placedBlocks)
+        {
+            Destroy(block);
+        }
+
+        placedBlocks.Clear();
     }
 }
 

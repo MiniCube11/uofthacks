@@ -341,6 +341,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placedPrefab: {fileID: 989111688259211098, guid: 6f6157a4841101342bc65512b1a83926, type: 3}
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1849304268
 GameObject:
   m_ObjectHideFlags: 0

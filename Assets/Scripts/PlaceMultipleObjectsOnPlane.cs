@@ -7,6 +7,8 @@ using UnityEngine.XR.ARSubsystems;
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlaceMultipleObjectsOnPlane : PressInputBase
 {
+    float snapGridSize = 0.1f;
+
     [SerializeField]
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
     GameObject placedPrefab;
@@ -31,8 +33,16 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
             var hitPose = hits[0].pose;
 
             // Instantiated the prefab.
-            spawnedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
+            spawnedObject = Instantiate(placedPrefab, SnapToGrid(hitPose.position), hitPose.rotation);
         }
+    }
+
+    Vector3 SnapToGrid(Vector3 position)
+    {
+        float x = Mathf.Round(position.x / snapGridSize) * snapGridSize;
+        float y = Mathf.Round(position.y / snapGridSize) * snapGridSize;
+        float z = Mathf.Round(position.z / snapGridSize) * snapGridSize;
+        return new Vector3(x, y, z);
     }
 }
 

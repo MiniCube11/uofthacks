@@ -72,7 +72,7 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
         return new Vector3(x, y, z);
     }
 
-    void clearBlocks()
+    public void clearBlocks()
     {
         foreach (var block in placedBlocks)
         {

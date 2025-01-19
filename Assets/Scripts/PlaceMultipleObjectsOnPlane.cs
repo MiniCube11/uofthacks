@@ -23,6 +23,8 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
 
     List<GameObject> placedBlocks = new List<GameObject>();
 
+    public Color blockColour = new Color(67f/255f, 156f/255f, 223f/255f);
+
     protected override void Awake()
     {
         base.Awake();
@@ -34,6 +36,33 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
         {
             clearBlocks();
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SetColour1();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            SetColour2();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            SetColour3();
+        }
+    }
+
+    public void SetColour1()
+    {
+        blockColour = new Color(67f/255f, 156f/255f, 223f/255f);
+    }
+
+    public void SetColour2()
+    {
+        blockColour = new Color(223f/255f, 67f/255f, 67f/255f);
+    }
+
+    public void SetColour3()
+    {
+        blockColour = new Color(67f/255f, 223f/255f, 67f/255f);
     }
 
     protected override void OnPress(Vector3 position)
@@ -66,13 +95,13 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
         if (cube != null && cube.TryGetComponent(out Renderer cubeRenderer))
         {
             cubeRenderer.material = new Material(cubeRenderer.material);
-            cubeRenderer.material.color = new Color(67f/255f, 156f/255f, 223f/255f);
+            cubeRenderer.material.color = blockColour;
         }
 
         if (cylinder != null && cylinder.TryGetComponent(out Renderer cylinderRenderer))
         {
             cylinderRenderer.material = new Material(cylinderRenderer.material);
-            cylinderRenderer.material.color = new Color(67f/255f, 156f/255f, 223f/255f);
+            cylinderRenderer.material.color = blockColour;
         }
 
         placedBlocks.Add(spawnedObject);

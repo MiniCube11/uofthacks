@@ -59,6 +59,12 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
     {
         spawnedObject = Instantiate(placedPrefab, position, rotation);
         spawnedObject.layer = LayerMask.NameToLayer("Blocks");
+        Transform sphere = spawnedObject.transform.Find("Sphere");
+        Transform cylinder = spawnedObject.transform.Find("Cylinder");
+        Renderer sphereRenderer = sphere.GetComponent<Renderer>();
+        sphereRenderer.material.color = new Color(67f/255f, 156f/255f, 223f/255f);
+        Renderer cylinderRenderer = cylinder.GetComponent<Renderer>();
+        cylinderRenderer.material.color = new Color(67f/255f, 156f/255f, 223f/255f);
         // Renderer renderer = spawnedObject.GetComponent<Renderer>();
         // renderer.material.color = new Color(67f/255f, 156f/255f, 223f/255f);
         placedBlocks.Add(spawnedObject);

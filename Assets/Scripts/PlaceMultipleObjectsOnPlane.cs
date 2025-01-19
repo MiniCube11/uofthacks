@@ -58,9 +58,9 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
     void PlaceBlock(Vector3 position, Quaternion rotation)
     {
         spawnedObject = Instantiate(placedPrefab, position, rotation);
-        
-        
         spawnedObject.layer = LayerMask.NameToLayer("Blocks");
+        // Renderer renderer = spawnedObject.GetComponent<Renderer>();
+        // renderer.material.color = new Color(67f/255f, 156f/255f, 223f/255f);
         placedBlocks.Add(spawnedObject);
     }
 

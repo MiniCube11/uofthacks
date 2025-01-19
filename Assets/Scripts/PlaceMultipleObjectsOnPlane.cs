@@ -23,7 +23,7 @@ public class PlaceMultipleObjectsOnPlane : PressInputBase
 
     List<GameObject> placedBlocks = new List<GameObject>();
 
-    public Color blockColour = new Color(67f/255f, 156f/255f, 223f/255f);
+    public Color blockColour = new Color(223f/255f, 67f/255f, 67f/255f);
 
     protected override void Awake()
     {

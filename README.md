@@ -1,22 +1,17 @@
-# Augmented Reality Lego App 🎨🔬
+# Terra 🎨🔬
 
-Welcome to the Augmented Reality Lego App, a groundbreaking fusion of creativity, technology, and interactive design! This mobile application, developed using Unity and C#, brings the timeless joy of building with Lego bricks into the digital realm of augmented reality.
+Change the way you see the world with Terra–an AR game where your imagination shapes reality through creating buildings and landscapes in real-world locations. We make the outside world more fun!
 
 ## Key Features
+- Create buildings tied to real-world locations
+- Intuitive interface
+- Accessible and free – simply pull out your phone to add blocks
+- View your buildings in 3d space
 
 ### Augmented Reality Lego Building
 - Visualize and interact with Lego models directly in your physical space. 🔨
 - Place, rotate, and stack blocks with intuitive touch controls.
 - Experience life-sized models as they appear seamlessly integrated into your environment.
-
-### Dynamic Interactions
-- **Realistic Physics**: Watch as blocks snap together or fall apart with lifelike behaviors.
-- **Creative Tools**: Customize colors, shapes, and sizes of Lego pieces to bring your vision to life.
-- **ProBuilder Integration**: Leverages the power of Unity ProBuilder for rapid prototyping and 3D model creation.
-
-### Immersive User Experience
-- Smooth performance on Android devices with ARCore support.
-- High-resolution graphics and real-world lighting effects for a realistic AR experience.
 
 ## Technology Used
 - **Unity**: Game engine for building immersive AR experiences. 🎮
